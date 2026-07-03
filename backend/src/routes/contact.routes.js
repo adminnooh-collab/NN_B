@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const authenticateAdmin = require("../middlewares/auth.middleware");
+// contacts endpoints are public (subscribe) and listing is public now
 
 const { createContact, getContacts } = require("../controllers/controller.controller");
 
 router.post("/", createContact);
-router.get("/", authenticateAdmin, getContacts);
+router.get("/", getContacts);
 
 module.exports = router;

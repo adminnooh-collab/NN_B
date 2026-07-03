@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const createUploader = require("../middlewere/genericUpload");
 const upload = createUploader("gallery");
-const authenticateAdmin = require("../middlewares/auth.middleware");
+// authentication not required for public gallery endpoints
 
 const {
   createGallery,
@@ -14,8 +14,8 @@ const {
 
 router.get("/", getGalleries);
 router.get("/:id", getGallery);
-router.post("/", authenticateAdmin, upload.single("image"), createGallery);
-router.put("/:id", authenticateAdmin, upload.single("image"), updateGallery);
-router.delete("/:id", authenticateAdmin, deleteGallery);
+router.post("/", upload.single("image"), createGallery);
+router.put("/:id", upload.single("image"), updateGallery);
+router.delete("/:id", deleteGallery);
 
 module.exports = router;

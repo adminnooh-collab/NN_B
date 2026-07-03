@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const createUploader = require("../middlewere/genericUpload");
 const upload = createUploader("collections");
-const authenticateAdmin = require("../middlewares/auth.middleware");
+// authentication not required for public collection endpoints
 
 const {
   createCollection,
@@ -14,8 +14,8 @@ const {
 
 router.get("/", getCollections);
 router.get("/:id", getCollection);
-router.post("/", authenticateAdmin, upload.single("image"), createCollection);
-router.put("/:id", authenticateAdmin, upload.single("image"), updateCollection);
-router.delete("/:id", authenticateAdmin, deleteCollection);
+router.post("/", upload.single("image"), createCollection);
+router.put("/:id", upload.single("image"), updateCollection);
+router.delete("/:id", deleteCollection);
 
 module.exports = router;

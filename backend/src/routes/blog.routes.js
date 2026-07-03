@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const createUploader = require("../middlewere/genericUpload");
 const upload = createUploader("blogs");
-const authenticateAdmin = require("../middlewares/auth.middleware");
+// authentication not required for public blog endpoints
 
 const {
   createBlog,
@@ -14,8 +14,8 @@ const {
 
 router.get("/", getBlogs);
 router.get("/:id", getBlog);
-router.post("/", authenticateAdmin, upload.single("image"), createBlog);
-router.put("/:id", authenticateAdmin, upload.single("image"), updateBlog);
-router.delete("/:id", authenticateAdmin, deleteBlog);
+router.post("/", upload.single("image"), createBlog);
+router.put("/:id", upload.single("image"), updateBlog);
+router.delete("/:id", deleteBlog);
 
 module.exports = router;

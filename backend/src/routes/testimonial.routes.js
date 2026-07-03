@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const authenticateAdmin = require("../middlewares/auth.middleware");
+// testimonials are public endpoints
 
 const {
   createTestimonial,
@@ -10,10 +10,10 @@ const {
   deleteTestimonial,
 } = require("../controllers/testimonial.controller");
 
-router.post("/", authenticateAdmin, createTestimonial);
+router.post("/", createTestimonial);
 router.get("/", getTestimonials);
 router.get("/:id", getTestimonial);
-router.put("/:id", authenticateAdmin, updateTestimonial);
-router.delete("/:id", authenticateAdmin, deleteTestimonial);
+router.put("/:id", updateTestimonial);
+router.delete("/:id", deleteTestimonial);
 
 module.exports = router;
